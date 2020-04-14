@@ -1,0 +1,134 @@
+import java.util.Scanner;
+    import java.util.*;
+      public class ClassAccount {
+        public static void main(String[] args) {
+           String name, accNo, accType;
+             double bal, amount;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter depositor name:");
+        name = sc.nextLine();
+        System.out.println("enter account number:");
+        accNo = sc.nextLine();
+        System.out.println("enter account type:");
+        accType = sc.nextLine();
+        System.out.println("enter account balance:");
+        bal = sc.nextDouble();
+        BankAccount account1 = new BankAccount(name, accNo, accType, bal);
+
+        Scanner n = new Scanner(System.in);
+        do {
+            System.out.println("enter the amount to deposit:");
+            double money = n.nextDouble();
+            account1.setAmountToDepose(money);
+            System.out.println(account1.deposit());
+
+            System.out.println("enter the amount to widthdraw:");
+            double w = n.nextDouble();
+            account1.setAmountTowithdraw(w);
+            System.out.println(account1.withdraw());
+            double mnt = account1.deposit();
+            account1.setAccountBalance(mnt - account1.getAmountTowithdraw());
+            System.out.println(account1.toString());
+        } while (true);
+
+    }
+}
+      
+ class BankAccount {
+    
+
+    private String depositorName;
+    private String accountNo;
+    private String accountType;
+    private double accountBalance;
+    private double amountTowithdraw;
+    private double amountToDepose;
+    public BankAccount(String depositorName, String accountNo, String accountType, double accountBalance) {
+        this.depositorName = depositorName;
+        this.accountNo = accountNo;
+        this.accountType = accountType;
+        this.accountBalance = accountBalance;
+
+    }
+    //default constructors
+
+    public BankAccount() {
+    }
+
+    public double withdraw() {
+
+
+        if (deposit() > 0) {
+            if (amountTowithdraw <= deposit()) {
+
+                // deposit()-amountTowithdraw
+
+
+                double rem = deposit() - amountTowithdraw;
+                System.out.print("remaining balance is after withdraw:" + rem);
+
+            }
+        } else {
+            System.out.print("your balance is negative!");
+        }
+        return 0;
+    }
+//print the name and the balance
+
+    public double getAmountTowithdraw() {
+        return amountTowithdraw;
+    }
+
+    public void setAmountTowithdraw(double amountTowithdraw) {
+        this.amountTowithdraw = amountTowithdraw;
+    }
+
+    public String toString() {
+        return "BankAccount{" + "name=" + depositorName + ", bal=" + accountBalance + '}';
+    }
+
+    public double deposit() {
+
+        return accountBalance + amountToDepose;
+    }
+
+    public double getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void setAccountBalance(double accountBalance) {
+        this.accountBalance = accountBalance;
+    }
+
+    public String getAccountNo() {
+        return accountNo;
+    }
+
+    public void setAccountNo(String accountNo) {
+        this.accountNo = accountNo;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+
+    public double getAmountToDepose() {
+        return amountToDepose;
+    }
+
+    public void setAmountToDepose(double amountToDepose) {
+        this.amountToDepose = amountToDepose;
+    }
+
+    public String getDepositorName() {
+        return depositorName;
+    }
+
+    public void setDepositorName(String depositorName) {
+        this.depositorName = depositorName;
+    }
+}
